@@ -16,7 +16,7 @@ package com.formacion.app.apirest.entity;
 
 	@Entity
 	@Table( name="clientes")
-	public class Clientes implements Serializable{
+	public class Cliente implements Serializable{
 
 		@Id
 		@GeneratedValue(strategy= GenerationType.IDENTITY)

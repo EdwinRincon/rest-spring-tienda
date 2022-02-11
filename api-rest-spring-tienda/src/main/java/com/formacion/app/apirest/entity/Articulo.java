@@ -7,7 +7,7 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 
-public class Articulos implements Serializable{
+public class Articulo implements Serializable{
 
 	/**
 	 * 
