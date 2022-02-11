@@ -1,14 +1,15 @@
 package com.formacionspring.app.apirest.controllers;
 
-import org.springframework.beans.factory.annotation.Autowired;
-
-import com.formacionspring.app.apirest.service.ClienteService;
-
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RestController;
 
 
+
+
+@RestController
+@RequestMapping("/api")
 public class ArticuloController {
 
-	@Autowired
-	private ClienteService servicio;
+	
 	
 }
