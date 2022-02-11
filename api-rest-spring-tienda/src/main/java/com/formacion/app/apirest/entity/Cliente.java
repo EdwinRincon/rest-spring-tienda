@@ -3,21 +3,27 @@ package com.formacion.app.apirest.entity;
 
 	import java.io.Serializable;
 	import java.util.Date;
+import java.util.List;
 
-	import javax.persistence.Column;
+import javax.persistence.Column;
 	import javax.persistence.Entity;
 	import javax.persistence.GeneratedValue;
 	import javax.persistence.GenerationType;
 	import javax.persistence.Id;
-	import javax.persistence.PrePersist;
+import javax.persistence.OneToMany;
+
 	import javax.persistence.Table;
-	import javax.persistence.Temporal;
-	import javax.persistence.TemporalType;
+
 
 	@Entity
 	@Table( name="clientes")
 	public class Cliente implements Serializable{
-
+		/**
+		 * 
+		 */
+		private static final long serialVersionUID = 1L;
+		@OneToMany
+		private List<Compra> compras;
 		@Id
 		@GeneratedValue(strategy= GenerationType.IDENTITY)
 		private long codCliente;
@@ -82,6 +88,12 @@ package com.formacion.app.apirest.entity;
 		}
 		public void setTelefono(int telefono) {
 			this.telefono = telefono;
+		}
+		public List<Compra> getCompras() {
+			return compras;
+		}
+		public void setCompras(List<Compra> compras) {
+			this.compras = compras;
 		}
 		
 		
