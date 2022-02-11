@@ -8,11 +8,19 @@
 		<version>2.6.3</version>
 		<relativePath/> <!-- lookup parent from repository -->
 	</parent>
+<<<<<<< HEAD
 	<groupId>com.formacion.app</groupId>
 	<artifactId>api-rest-spring-tienda</artifactId>
 	<version>0.0.1-SNAPSHOT</version>
 	<name>api-rest-spring-tienda</name>
 	<description>API REST SPRINGBOOT</description>
+=======
+	<groupId>com.formacionspring.app</groupId>
+	<artifactId>api-rest-spring-tienda</artifactId>
+	<version>0.0.1-SNAPSHOT</version>
+	<name>api-rest-spring-tienda</name>
+	<description>API REST SPRINGBOOT TIENDA</description>
+>>>>>>> origin/Javi
 	<properties>
 		<java.version>11</java.version>
 	</properties>
