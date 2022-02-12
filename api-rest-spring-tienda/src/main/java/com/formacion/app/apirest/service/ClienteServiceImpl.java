@@ -34,7 +34,11 @@ public class ClienteServiceImpl implements ClienteService {
 	
 	
 	
-	
+	@Transactional
+	@Override
+	public Cliente postCliente(Cliente cliente) {
+		return this.clienteDAO.save(cliente);
+	}
 	
 	
 	

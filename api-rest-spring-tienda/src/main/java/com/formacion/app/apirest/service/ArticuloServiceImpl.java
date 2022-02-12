@@ -25,17 +25,13 @@ public class ArticuloServiceImpl implements ArticuloService {
 	
 	
 	
+	@Transactional
+	@Override
+	public Articulo postArticulo(Articulo articulo) {
+		return this.articuloDAO.save(articulo);
+	}
 	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
+		
 	
 	
 	

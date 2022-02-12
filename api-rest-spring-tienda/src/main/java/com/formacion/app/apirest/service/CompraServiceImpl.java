@@ -26,13 +26,12 @@ public class CompraServiceImpl implements CompraService {
 	
 	
 	
-	
-	
-	
-	
-	
-	
-	
+	@Transactional
+	@Override
+	public Compra postCompra(Compra compra) {
+		return this.compraDAO.save(compra);
+	}
+
 	
 	
 	

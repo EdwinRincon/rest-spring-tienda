@@ -13,7 +13,7 @@ public interface CompraService {
 	
 	
 	
-	
+	Compra postCompra(Compra compra);
 	
 	
 	

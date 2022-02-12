@@ -14,7 +14,7 @@ public interface ClienteService {
 	
 	
 	
-	
+	Cliente postCliente(Cliente cliente);
 	
 	
 	

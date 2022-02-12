@@ -9,6 +9,8 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -43,36 +45,33 @@ public class ClienteController {
 	
 	
 	
+	@PostMapping("")
+	public ResponseEntity<?> postCliente(@RequestBody Cliente cliente) {
+		Cliente newCliente = null;
+		Map<String, Object> response = new HashMap<>();
+		try {
+			newCliente = clienteServiceImpl.postCliente(cliente);
+		} catch (DataAccessException e) {
+			// TODO: handle exception
+			response.put("mensaje", "Error al guardar en la base de datos");
+			response.put("error", e.getMessage().concat("_ ").concat(e.getMostSpecificCause().getMessage()));
+			return new ResponseEntity<Map<String, Object>>(response, HttpStatus.INTERNAL_SERVER_ERROR);
+		}
+		if (newCliente == null) {
+			response.put("mensaje", "El cliente: " + cliente.getNombre()+" "+cliente.getApellidos() + " no se ha guardado en la base de datos");
+			return new ResponseEntity<Map<String, Object>>(response, HttpStatus.CONFLICT);
+		}
+		response.put("cliente", newCliente);
+		response.put("mensaje", "Se ha guardado exitosamente!");
+		return new ResponseEntity<Map<String, Object>>(response, HttpStatus.CREATED);
+
+	}
 	
 	
 	
 	
 	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
+
 	
 	
 	

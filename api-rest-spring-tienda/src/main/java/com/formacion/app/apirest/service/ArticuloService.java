@@ -12,7 +12,7 @@ public interface ArticuloService {
 	
 	
 	
-	
+	Articulo postArticulo(Articulo articulo);
 	
 	
 	
