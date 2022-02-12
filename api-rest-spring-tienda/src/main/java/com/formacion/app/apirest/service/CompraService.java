@@ -2,10 +2,10 @@ package com.formacion.app.apirest.service;
 
 import org.springframework.stereotype.Service;
 
-import com.formacion.app.apirest.entity.Articulo;
+import com.formacion.app.apirest.entity.Compra;
 
 @Service
-public interface ArticuloService {
+public interface CompraService {
 
 	
 	
@@ -18,5 +18,7 @@ public interface ArticuloService {
 	
 	
 	
-	Articulo deleteArticulo(long id);
+	
+	
+	Compra deleteCompra(long id);
 }
