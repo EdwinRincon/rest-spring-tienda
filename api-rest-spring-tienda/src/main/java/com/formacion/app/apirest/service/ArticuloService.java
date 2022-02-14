@@ -15,8 +15,7 @@ public interface ArticuloService {
 	Articulo postArticulo(Articulo articulo);
 	
 	
-	
-	
+	Articulo putArticulo(Articulo articulo, long id);	
 	
 	Articulo deleteArticulo(long id);
 }

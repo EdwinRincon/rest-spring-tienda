@@ -10,6 +10,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
@@ -77,7 +78,27 @@ public class ClienteController {
 	
 	
 	
-	
+	@PutMapping("/{id}")
+	public ResponseEntity<?> putCliente(@RequestBody Cliente cliente, @PathVariable long id) {
+		Cliente editCliente = null;
+		Map<String, Object> response = new HashMap<>();
+		try {
+			editCliente = clienteServiceImpl.putCliente(cliente, id);
+		} catch (DataAccessException e) {
+			// TODO: handle exception
+			response.put("mensaje", "Error al editar al usuario");
+			response.put("error", e.getMessage().concat("_ ").concat(e.getMostSpecificCause().getMessage()));
+			return new ResponseEntity<Map<String, Object>>(response, HttpStatus.INTERNAL_SERVER_ERROR);
+		}
+		if (editCliente == null) {
+			response.put("mensaje", "No se han hecho cambios para este cliente");
+			return new ResponseEntity<Map<String, Object>>(response, HttpStatus.CONFLICT);
+		}
+		response.put("cliente", editCliente);
+		response.put("mensaje", "Se ha editado exitosamente!");
+		return new ResponseEntity<Map<String, Object>>(response, HttpStatus.OK);
+
+	}	
 	
 	
 	

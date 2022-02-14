@@ -13,6 +13,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
@@ -87,7 +88,27 @@ public class ArticuloController {
 	
 	
 	
-	
+	@PutMapping("/{id}")
+	public ResponseEntity<?> putArticulo(@RequestBody Articulo articulo, @PathVariable long id) {
+		Articulo editArticulo = null;
+		Map<String, Object> response = new HashMap<>();
+		try {
+			editArticulo = articuloServiceImpl.putArticulo(articulo, id);
+		} catch (DataAccessException e) {
+			// TODO: handle exception
+			response.put("mensaje", "Error al editar al articulo");
+			response.put("error", e.getMessage().concat("_ ").concat(e.getMostSpecificCause().getMessage()));
+			return new ResponseEntity<Map<String, Object>>(response, HttpStatus.INTERNAL_SERVER_ERROR);
+		}
+		if (editArticulo == null) {
+			response.put("mensaje", "No se han hecho cambios para este articulo");
+			return new ResponseEntity<Map<String, Object>>(response, HttpStatus.CONFLICT);
+		}
+		response.put("articulo", editArticulo);
+		response.put("mensaje", "Se ha editado exitosamente!");
+		return new ResponseEntity<Map<String, Object>>(response, HttpStatus.OK);
+
+	}	
 	
 	
 	

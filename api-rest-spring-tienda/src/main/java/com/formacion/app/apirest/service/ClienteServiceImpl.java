@@ -33,6 +33,24 @@ public class ClienteServiceImpl implements ClienteService {
 	
 	
 	
+	@Transactional
+	@Override
+	public Cliente putCliente(Cliente cliente, long id) {
+		Cliente toUpdateCliente = getCliente(id);
+
+		if (toUpdateCliente == null)
+			return null;
+
+		toUpdateCliente.setNombre(cliente.getNombre());
+		toUpdateCliente.setApellidos(cliente.getApellidos());
+		toUpdateCliente.setEmpresa(cliente.getEmpresa());
+		toUpdateCliente.setPuesto(cliente.getPuesto());
+		toUpdateCliente.setCp(cliente.getCp());
+		toUpdateCliente.setProvincia(cliente.getProvincia());
+		toUpdateCliente.setTelefono(cliente.getTelefono());
+		toUpdateCliente.setFechaNacimiento(cliente.getFechaNacimiento());
+		return this.clienteDAO.save(toUpdateCliente);
+	}
 	
 	@Transactional
 	@Override

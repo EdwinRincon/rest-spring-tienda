@@ -10,6 +10,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
@@ -75,38 +76,27 @@ public class CompraController {
 		return new ResponseEntity<Map<String, Object>>(response, HttpStatus.CREATED);
 
 	}
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
+	@PutMapping("/{id}")
+	public ResponseEntity<?> putCompra(@RequestBody Compra compra, @PathVariable long id) {
+		Compra editCompra = null;
+		Map<String, Object> response = new HashMap<>();
+		try {
+			editCompra = compraServiceImpl.putCompra(compra, id);
+		} catch (DataAccessException e) {
+			// TODO: handle exception
+			response.put("mensaje", "Error al editar la comrpa");
+			response.put("error", e.getMessage().concat("_ ").concat(e.getMostSpecificCause().getMessage()));
+			return new ResponseEntity<Map<String, Object>>(response, HttpStatus.INTERNAL_SERVER_ERROR);
+		}
+		if (editCompra == null) {
+			response.put("mensaje", "No se han hecho cambios para esta compra");
+			return new ResponseEntity<Map<String, Object>>(response, HttpStatus.CONFLICT);
+		}
+		response.put("compra", editCompra);
+		response.put("mensaje", "Se ha editado exitosamente!");
+		return new ResponseEntity<Map<String, Object>>(response, HttpStatus.OK);
+
+	}	
 
 	@DeleteMapping("/{id}")
 	public ResponseEntity<?> deleteCompra(@PathVariable long id) {

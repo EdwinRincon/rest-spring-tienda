@@ -33,21 +33,21 @@ public class CompraServiceImpl implements CompraService {
 	}
 
 	
+	@Transactional
+	@Override
+	public Compra putCompra(Compra compra, long id) {
+		Compra toUpdateCompra = getCompra(id);
+		
+		if (toUpdateCompra==null) return null;
+		
+		toUpdateCompra.setCliente(compra.getCliente());
+		toUpdateCompra.setArticulo(compra.getArticulo());
+		toUpdateCompra.setFecha(compra.getFecha());
+		toUpdateCompra.setUnidades(compra.getUnidades());
+		return this.compraDAO.save(toUpdateCompra);
+	}
 	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
+
 	@Transactional
 	@Override
 	public Compra deleteCompra(long id) {
