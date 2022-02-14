@@ -8,4 +8,5 @@ import com.formacion.app.apirest.entity.Articulo;
 @Repository
 public interface ArticuloDAO extends CrudRepository<Articulo,Long> {
 
+	
 }

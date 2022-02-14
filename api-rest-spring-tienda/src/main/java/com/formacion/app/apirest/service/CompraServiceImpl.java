@@ -26,6 +26,11 @@ public class CompraServiceImpl implements CompraService {
 	public Compra getCompra(long id) {
 		return this.compraDAO.findById(id).orElse(null);
 	}
+	
+	@Override
+	public List<Compra> getComprasCliente(long codCliente) {
+		return this.compraDAO.getComprasCliente(codCliente);
+	}
 
 	@Transactional
 	@Override

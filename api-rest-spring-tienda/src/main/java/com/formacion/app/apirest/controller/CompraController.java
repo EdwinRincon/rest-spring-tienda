@@ -33,7 +33,7 @@ public class CompraController {
 		return new ResponseEntity<>(compraServiceImpl.getCompras(), HttpStatus.OK);
 	}
 	
-	@GetMapping("/{id}")
+	@GetMapping("/compra/{id}")
 	public ResponseEntity<?> getCompra(@PathVariable Long id) {
 		Compra compra = null;
 		Map<String, Object> response = new HashMap<>();
@@ -52,6 +52,27 @@ public class CompraController {
 		return new ResponseEntity<Compra>(compra, HttpStatus.OK);
 
 	}	
+	
+	@GetMapping("/cliente/{codCliente}")
+	public ResponseEntity<?> getComprasCliente(@PathVariable Long codCliente) {
+		List<Compra> compra = null;
+		Map<String, Object> response = new HashMap<>();
+		try {
+			compra = compraServiceImpl.getComprasCliente(codCliente);
+		} catch (DataAccessException e) {
+			// TODO: handle exception
+			response.put("mensaje", "Error al realizar consulta a la base de datos");
+			response.put("error", e.getMessage().concat("_ ").concat(e.getMostSpecificCause().getMessage()));
+			return new ResponseEntity<Map<String, Object>>(response, HttpStatus.INTERNAL_SERVER_ERROR);
+		}
+		if (compra == null) {
+			response.put("mensaje", "El cliente ID: " + codCliente.toString() + " no existe en la base de datos");
+			return new ResponseEntity<Map<String, Object>>(response, HttpStatus.NOT_FOUND);
+		}
+		return new ResponseEntity<List<Compra>>(compra,HttpStatus.OK);
+
+	}
+	
 	
 	@PostMapping("")
 	public ResponseEntity<?> postCompra(@RequestBody Compra compra) {

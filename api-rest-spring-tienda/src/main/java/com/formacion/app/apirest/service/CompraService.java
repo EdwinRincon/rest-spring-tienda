@@ -12,6 +12,8 @@ public interface CompraService {
 	List<Compra> getCompras();
 
 	Compra getCompra(long id);
+	
+	List<Compra> getComprasCliente(long codCliente);
 
 	Compra postCompra(Compra compra);
 	
