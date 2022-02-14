@@ -1,5 +1,7 @@
 package com.formacion.app.apirest.service;
 
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -13,18 +15,18 @@ public class ArticuloServiceImpl implements ArticuloService {
 	@Autowired
 	ArticuloDAO articuloDAO;
 	
+	@Transactional(readOnly=true)
+	@Override
+	public List<Articulo> getArticulos() {
+		return (List<Articulo>) this.articuloDAO.findAll();
+	}
 	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
+	@Transactional(readOnly=true)
+	@Override
+	public Articulo getArticulo(long id) {
+		return this.articuloDAO.findById(id).orElse(null);
+	}
+
 	@Transactional
 	@Override
 	public Articulo postArticulo(Articulo articulo) {
