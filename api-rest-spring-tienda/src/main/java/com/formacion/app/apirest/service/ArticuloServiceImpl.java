@@ -37,19 +37,22 @@ public class ArticuloServiceImpl implements ArticuloService {
 	
 	
 	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
+	@Transactional
+	@Override
+	public Articulo putArticulo(Articulo articulo, long id) {
+		Articulo toUpdateArticulo = getArticulo(id);
+		
+		if (toUpdateArticulo==null) return null;
+		
+		toUpdateArticulo.setNombre(articulo.getNombre());
+		toUpdateArticulo.setDescripcion(articulo.getDescripcion());
+		toUpdateArticulo.setPrecioUnidad(articulo.getPrecioUnidad());
+		toUpdateArticulo.setUnidadesStock(articulo.getUnidadesStock());
+		toUpdateArticulo.setStockSeguridad(articulo.getStockSeguridad());
+		toUpdateArticulo.setImagen(articulo.getImagen());
+		return this.articuloDAO.save(toUpdateArticulo);
+	}	
+
 	@Transactional
 	@Override
 	public Articulo deleteArticulo(long id) {

@@ -28,7 +28,7 @@ import javax.persistence.OneToMany;
 		@GeneratedValue(strategy= GenerationType.IDENTITY)
 		private long codCliente;
 		@Column(nullable = false)
-		private String nombre, apellidos, empresa, puesto,CP,Provincia;
+		private String nombre, apellidos, empresa, puesto,cp,Provincia;
 		
 		private int telefono;
 		@Column(nullable = false)
@@ -65,11 +65,11 @@ import javax.persistence.OneToMany;
 		public void setPuesto(String puesto) {
 			this.puesto = puesto;
 		}
-		public String getCP() {
-			return CP;
+		public String getCp() {
+			return cp;
 		}
-		public void setCP(String cP) {
-			CP = cP;
+		public void setCp(String cp) {
+			this.cp = cp;
 		}
 		public String getProvincia() {
 			return Provincia;

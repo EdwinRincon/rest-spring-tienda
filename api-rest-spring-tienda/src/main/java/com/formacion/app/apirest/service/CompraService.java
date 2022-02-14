@@ -15,7 +15,7 @@ public interface CompraService {
 
 	Compra postCompra(Compra compra);
 	
-	
-	
+	Compra putCompra(Compra compra, long id);	
+		
 	Compra deleteCompra(long id);
 }

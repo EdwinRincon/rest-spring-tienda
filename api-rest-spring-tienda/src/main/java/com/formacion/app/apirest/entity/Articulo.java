@@ -52,10 +52,10 @@ public class Articulo implements Serializable{
 	public void setPrecioUnidad(float precioUnidad) {
 		this.precioUnidad = precioUnidad;
 	}
-	public int getStock() {
+	public int getUnidadesStock() {
 		return stock;
 	}
-	public void setStock(int stock) {
+	public void setUnidadesStock(int stock) {
 		this.stock = stock;
 	}
 	public int getStockSeguridad() {

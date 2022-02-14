@@ -16,6 +16,7 @@ public interface ClienteService {
 	Cliente postCliente(Cliente cliente);
 	
 	
+	Cliente putCliente(Cliente cliente, long id);
 	
 	
 	Cliente deleteCliente(long id);
