@@ -1,12 +1,15 @@
 package com.formacion.app.apirest.controller;
 
 import java.io.File;
+import java.io.IOException;
 import java.net.MalformedURLException;
+import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.UUID;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.core.io.Resource;
@@ -22,7 +25,9 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.multipart.MultipartFile;
 
 import com.formacion.app.apirest.entity.Articulo;
 import com.formacion.app.apirest.service.ArticuloServiceImpl;
@@ -219,6 +224,42 @@ public class ArticuloController {
 			}
 		}
 	}
+	
+	
+	
+	
+	
+	// Subir Imagenes al servidor
+		@PostMapping("/upload/img/{id}")
+		public ResponseEntity<?> uploadImagen(@RequestParam("archivo") MultipartFile archivo,@PathVariable Long id){
+			Articulo articulo = articuloServiceImpl.getArticulo(id);
+			Map<String, Object> response = new HashMap<>();
+			
+			if(!archivo.isEmpty()) {
+				String nombreArchivo= UUID.randomUUID().toString()+"_"+archivo.getOriginalFilename().replace(" ","");
+				Path rutaArchivo = Paths.get("uploads").resolve(nombreArchivo).toAbsolutePath();
+				
+				try {
+					Files.copy(archivo.getInputStream(), rutaArchivo);
+				} catch (IOException e) {
+					// TODO: handle exception
+					response.put("mensaje", "Error al subir el archivo");
+					return new ResponseEntity<Map<String,Object>>(response,HttpStatus.INTERNAL_SERVER_ERROR);
+					
+				}			
+				
+				deleteLocalImage(articulo);
+				articulo.setImagen(nombreArchivo);
+				articuloServiceImpl.putArticulo(articulo, id);
+				response.put("mensaje", "subida correcta de imagen "+ nombreArchivo);
+			} else {
+				response.put("Archivo", "archivo vacio");
+			}
+			return new ResponseEntity<Map<String,Object>>(response,HttpStatus.CREATED);
+		}
+	
+	
+	
 	
 	// Devuelve una imagen
 	@GetMapping("download/img/{nombreImagen:.+}")
