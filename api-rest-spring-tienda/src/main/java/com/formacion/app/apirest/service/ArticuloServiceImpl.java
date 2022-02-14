@@ -48,7 +48,7 @@ public class ArticuloServiceImpl implements ArticuloService {
 		toUpdateArticulo.setDescripcion(articulo.getDescripcion());
 		toUpdateArticulo.setPrecioUnidad(articulo.getPrecioUnidad());
 		toUpdateArticulo.setUnidadesStock(articulo.getUnidadesStock());
-		toUpdateArticulo.setStockSeguridad(articulo.getStockSeguridad());
+		toUpdateArticulo.setStockSeguriad(articulo.getStockSeguriad());
 		toUpdateArticulo.setImagen(articulo.getImagen());
 		return this.articuloDAO.save(toUpdateArticulo);
 	}	
