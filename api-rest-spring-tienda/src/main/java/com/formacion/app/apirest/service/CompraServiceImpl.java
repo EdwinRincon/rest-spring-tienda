@@ -7,6 +7,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import com.formacion.app.apirest.dao.CompraDAO;
+import com.formacion.app.apirest.entity.Articulo;
 import com.formacion.app.apirest.entity.Compra;
 
 @Service

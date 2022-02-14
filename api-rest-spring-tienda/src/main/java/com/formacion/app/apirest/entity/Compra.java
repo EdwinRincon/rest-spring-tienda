@@ -3,6 +3,7 @@ package com.formacion.app.apirest.entity;
 import java.io.Serializable;
 import java.util.Date;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
@@ -15,6 +16,9 @@ import javax.persistence.PrePersist;
 import javax.persistence.Table;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
+
+import org.hibernate.annotations.OnDelete;
+import org.hibernate.annotations.OnDeleteAction;
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 
@@ -40,12 +44,14 @@ public class Compra implements Serializable {
 			fecha = new Date();
 	}
 	
-	@ManyToOne(fetch=FetchType.LAZY)
+	@ManyToOne(cascade= {CascadeType.PERSIST, CascadeType.REMOVE}, fetch=FetchType.LAZY)
+	@OnDelete(action = OnDeleteAction.CASCADE)
 	@JoinColumn(name="cod_cliente")
 	@JsonIgnoreProperties({"hibernateLazyInitializer", "handler"})
 	private Cliente cliente;
 	
-	@ManyToOne(fetch=FetchType.LAZY)
+	@ManyToOne(cascade= {CascadeType.PERSIST, CascadeType.REMOVE}, fetch=FetchType.LAZY)
+	@OnDelete(action = OnDeleteAction.CASCADE)
 	@JoinColumn(name="cod_articulo")
 	@JsonIgnoreProperties({"hibernateLazyInitializer", "handler"})
 	private Articulo articulo;
